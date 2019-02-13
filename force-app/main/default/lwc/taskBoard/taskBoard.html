@@ -5,7 +5,12 @@
                 <h2 class="slds-text-heading_medium slds-p-bottom_medium slds-p-top_large" title="Task Board">Task Board</h2>
             </lightning-layout-item>
             <lightning-layout-item padding="horizontal-small" size="2">
-                <lightning-layout multiple-rows="true" >
+                <lightning-layout 
+                    multiple-rows="true" 
+                    data-task-status="Not Started"
+                    ondragover={dragTaskCardOver}
+                    ondrop={dropTaskCard}    
+                >
                     <lightning-layout-item size="12">
                         <lightning-card class="notStartedTasksLane">
                             <div slot="title">Not Started</div>
@@ -13,8 +18,18 @@
                     </lightning-layout-item>
                     <template if:true={notStartedTasks}>
                         <template for:each={notStartedTasks} for:item="task">
-                            <lightning-layout-item key={task.Id} size="12" class="notStartedTask">
-                                <c-task-card task={task}></c-task-card>
+                            <lightning-layout-item 
+                                key={task.Id}
+                                id={task.Id}
+                                size="12" 
+                                class="notStartedTask"
+                                data-task-id={task.Id}
+                                draggable="true"
+                                ondragstart={startTaskCardDrag}
+                            >
+                                <c-task-card 
+                                    task={task}
+                                ></c-task-card>
                             </lightning-layout-item>
                         </template>
                     </template>
@@ -22,15 +37,30 @@
             </lightning-layout-item>
 
             <lightning-layout-item padding="horizontal-small" size="2">
-                <lightning-layout multiple-rows="true" >
+                <lightning-layout 
+                    multiple-rows="true"
+                    data-task-status="In Progress"
+                    ondragover={dragTaskCardOver}
+                    ondrop={dropTaskCard}
+                >
                     <lightning-layout-item size="12">
-                        <lightning-card class="inProgressTasksLane">
+                        <lightning-card 
+                            class="inProgressTasksLane"     
+                        >
                             <div slot="title">In Progress</div>
                         </lightning-card>
                     </lightning-layout-item>
                     <template if:true={inProgressTasks}>
                         <template for:each={inProgressTasks} for:item="task">
-                            <lightning-layout-item key={task.Id} size="12" class="inProgressTask">
+                            <lightning-layout-item 
+                                key={task.Id}
+                                id={task.Id}
+                                size="12" 
+                                class="inProgressTask"
+                                data-task-id={task.Id}
+                                draggable="true"
+                                ondragstart={startTaskCardDrag}
+                            >
                                 <c-task-card task={task}></c-task-card>
                             </lightning-layout-item>
                         </template>
@@ -39,7 +69,12 @@
             </lightning-layout-item>
 
             <lightning-layout-item padding="horizontal-small" size="2">
-                <lightning-layout multiple-rows="true" >
+                <lightning-layout 
+                    multiple-rows="true" 
+                    data-task-status="Completed"
+                    ondragover={dragTaskCardOver}
+                    ondrop={dropTaskCard}    
+                >
                     <lightning-layout-item size="12">
                         <lightning-card class="completedTasksLane">
                             <div slot="title">Completed</div>
@@ -47,7 +82,15 @@
                     </lightning-layout-item>
                     <template if:true={completedTasks}>
                         <template for:each={completedTasks} for:item="task">
-                            <lightning-layout-item key={task.Id} size="12" class="completedTask">
+                            <lightning-layout-item 
+                                key={task.Id} 
+                                id={task.Id}
+                                size="12" 
+                                class="completedTask"
+                                data-task-id={task.Id}
+                                draggable="true"
+                                ondragstart={startTaskCardDrag}
+                            >
                                 <c-task-card task={task}></c-task-card>
                             </lightning-layout-item>
                         </template>
@@ -56,7 +99,12 @@
             </lightning-layout-item>
 
             <lightning-layout-item padding="horizontal-small" size="2">
-                <lightning-layout multiple-rows="true" >
+                <lightning-layout 
+                    multiple-rows="true" 
+                    data-task-status="Waiting on someone else"
+                    ondragover={dragTaskCardOver}
+                    ondrop={dropTaskCard}    
+                >
                     <lightning-layout-item size="12">
                         <lightning-card class="waitingOnSomeoneTasksLane">
                             <div slot="title">Waiting on someone else</div>
@@ -64,7 +112,15 @@
                     </lightning-layout-item>
                     <template if:true={waitingOnSomeoneTasks}>
                         <template for:each={waitingOnSomeoneTasks} for:item="task">
-                            <lightning-layout-item key={task.Id} size="12" class="waitingOnSomeoneTask">
+                            <lightning-layout-item 
+                                key={task.Id} 
+                                id={task.Id}
+                                size="12" 
+                                class="waitingOnSomeoneTask"
+                                data-task-id={task.Id}
+                                draggable="true"
+                                ondragstart={startTaskCardDrag}
+                            >
                                 <c-task-card task={task}></c-task-card>
                             </lightning-layout-item>
                         </template>
@@ -73,7 +129,12 @@
             </lightning-layout-item>
 
             <lightning-layout-item padding="horizontal-small" size="2">
-                <lightning-layout multiple-rows="true" >
+                <lightning-layout 
+                    multiple-rows="true" 
+                    data-task-status="Deferred"
+                    ondragover={dragTaskCardOver}
+                    ondrop={dropTaskCard}    
+                >
                     <lightning-layout-item size="12">
                         <lightning-card class="deferredTasksLane">
                             <div slot="title">Deferred</div>
@@ -81,7 +142,15 @@
                     </lightning-layout-item>
                     <template if:true={deferredTasks}>
                         <template for:each={deferredTasks} for:item="task">
-                            <lightning-layout-item key={task.Id} size="12" class="deferredTask">
+                            <lightning-layout-item 
+                                key={task.Id} 
+                                id={task.Id}
+                                size="12" 
+                                class="deferredTask"
+                                data-task-id={task.Id}
+                                draggable="true"
+                                ondragstart={startTaskCardDrag}
+                            >
                                 <c-task-card task={task}></c-task-card>
                             </lightning-layout-item>
                         </template>

@@ -20,4 +20,13 @@ public with sharing class TaskBoardController {
         upsert tasks;
         return tasks;
     }
+
+    @AuraEnabled
+    public static void updateTaskStatus(Id taskId, String status) {
+        update new Task(
+            Id = taskId, 
+            Status = status
+        );
+    }
+
 }
