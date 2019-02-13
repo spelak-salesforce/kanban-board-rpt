@@ -49,6 +49,12 @@ export default class TaskCard extends LightningElement {
 
                 // Set task as result
                 {
+                    /*
+                        Since task is decorated with @api, task's properties are immutable.
+                        Therefore, to change a task property, task needs to be reset.
+
+                        result's ActivityDate is returned as a DateTime instead of yyyy-MM-dd
+                    */
                     this.task = result[0];
                 }
                 

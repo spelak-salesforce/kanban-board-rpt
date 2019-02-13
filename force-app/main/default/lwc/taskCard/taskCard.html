@@ -6,7 +6,14 @@
                 <dt>Owner:</dt>
                 <dd class="ownerName">{task.Owner.Name}</dd>
                 <dt>Due Date:</dt>
-                <dd class="dueDate">{task.ActivityDate}</dd>
+                <dd class="dueDate">
+                    <lightning-formatted-date-time
+                        value={task.ActivityDate}
+                        year="numeric"
+                        month="2-digit"
+                        day="2-digit"
+                    ></lightning-formatted-date-time>
+                </dd>
                 <dt>Comments:</dt>
                 <dd class="description">
                     <template if:true={isEditing}>
