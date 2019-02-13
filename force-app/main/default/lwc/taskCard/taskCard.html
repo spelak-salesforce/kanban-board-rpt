@@ -8,12 +8,40 @@
                 <dt>Due Date:</dt>
                 <dd class="dueDate">{task.ActivityDate}</dd>
                 <dt>Comments:</dt>
-                <dd class="description">{task.Description}</dd>
+                <dd class="description">
+                    <template if:true={isEditing}>
+                        <lightning-textarea 
+                            name="Description"
+                            value={description}
+                            label="Comments"
+                            variant="label-hidden"
+                            onchange={changeDescription}
+                        ></lightning-textarea>
+                    </template>
+                    <template if:false={isEditing}>
+                        {task.Description}
+                    </template>
+                </dd>
             </dl>
         </div>
 
         <div slot="actions">
-            <lightning-button-icon icon-name="utility:edit" onclick={edit}>Edit</lightning-button-icon>
+            <template if:false={isEditing}>
+                <lightning-button-icon 
+                    icon-name="utility:edit" 
+                    onclick={edit}
+                >Edit</lightning-button-icon>
+            </template>
+            <template if:true={isEditing}>
+                <lightning-button-icon 
+                    icon-name="utility:check" 
+                    onclick={save}
+                >Save</lightning-button-icon>
+                <lightning-button-icon 
+                    icon-name="utility:close" 
+                    onclick={cancel}
+                >Save</lightning-button-icon>
+            </template>
         </div>
     </lightning-card>
 </template>
